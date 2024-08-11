@@ -10,8 +10,8 @@ def probability2_process():
     # 시간(HH:MM) 추출
     df['time'] = df['timestamp'].dt.strftime('%H:%M')
 
-    # 주파수 대역 컬럼 리스트
-    frequency_bands = ['RB_800', 'RB_1800', 'RB_2100', 'RB_2600_10', 'RB_2600_20']
+    # 주파수 대역 컬럼 리스트 (800MHz와 1800MHz 제외)
+    frequency_bands = ['RB_2100', 'RB_2600_10', 'RB_2600_20']
 
     # enbid_pci와 time으로 그룹화하고 각 주파수 대역의 평균 계산
     result = df.groupby(['enbid_pci', 'time']).agg({

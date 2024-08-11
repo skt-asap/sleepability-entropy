@@ -13,9 +13,8 @@ def entropy_zero_process():
         # 매우 작은 엔트로피 값을 0으로 변환
         return 0 if entropy < 1e-6 else entropy
 
-    # 주파수 대역 컬럼 리스트
-    RB_columns = ['sleep_probability_RB_800', 'sleep_probability_RB_1800', 
-                  'sleep_probability_RB_2100', 'sleep_probability_RB_2600_10', 
+    # 주파수 대역 컬럼 리스트 (800MHz와 1800MHz 제외)
+    RB_columns = ['sleep_probability_RB_2100', 'sleep_probability_RB_2600_10', 
                   'sleep_probability_RB_2600_20']
 
     # 각 enbid_pci와 시간대별로 엔트로피 계산

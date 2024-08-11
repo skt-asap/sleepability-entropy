@@ -9,18 +9,18 @@ def probability_process():
     df['time'] = df['timestamp'].dt.time
     df['date'] = df['timestamp'].dt.date
 
-    # 주파수 대역 컬럼 리스트 정의
-    RB_columns = ['RB_800', 'RB_1800', 'RB_2100', 'RB_2600_10', 'RB_2600_20']
+    # 주파수 대역 컬럼 리스트 정의 (800MHz와 1800MHz 제외)
+    RB_columns = ['RB_2100', 'RB_2600_10', 'RB_2600_20']
 
     # 각 주파수 대역의 최대 가용 RB 수 정의
-    max_rb = {'RB_800': 50, 'RB_1800': 100, 'RB_2100': 75, 'RB_2600_10': 50, 'RB_2600_20': 100}
+    max_rb = {'RB_2100': 75, 'RB_2600_10': 50, 'RB_2600_20': 100}
 
     def check_sleep_possibility(row, band):
         adjusted_rbtotal = row['RBtotal'] - max_rb[band]
         threshold = 0.6 * adjusted_rbtotal
         return int(row['RBused'] <= threshold)
 
-    # 각 주파수 대역별로 슬립 가능성 계산
+    # 각 주파수 대역별로 슬립 가능성 계산 (800MHz와 1800MHz 제외)
     for band in RB_columns:
         df[f'sleep_possible_{band}'] = df.apply(lambda row: check_sleep_possibility(row, band), axis=1)
 
