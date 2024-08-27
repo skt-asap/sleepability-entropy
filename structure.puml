@@ -1,0 +1,44 @@
+@startuml
+skinparam defaultFontName Arial
+skinparam backgroundColor #EEEBDC
+skinparam handwritten false
+skinparam activity {
+StartColor #87B741
+EndColor #E85642
+BackgroundColor #FEFECE
+BorderColor #3C7A89
+FontColor #3C7A89
+}
+
+start
+:main: 모든 프로세스 실행;
+:sorting: 입력 데이터 정렬;
+note right
+ enbid_pci별 처리
+ 휴일, 평일 별로 정렬
+end note
+:probability: 수면 가능성 계산;
+note right
+ 정렬된 데이터 사용
+ 모든 주파수 조합에 대한
+ 수면 가능성 계산 (threshold: 60%)
+end note
+:probability2: 수면 확률 계산;
+note right
+ 수면 가능성 데이터 사용
+ 시간별, 셀별 평균 확률 계산
+end note
+:entropy_analysis: 엔트로피 계산 및 분석;
+note right
+ 수면 확률 데이터 사용
+ 엔트로피 계산
+ 엔트로피 0 또는 낮은 값 식별
+ (maximum threshold 적용)
+end note
+:minimumRB_analysis: 최소 RB 분석;
+note right
+ 선별된 낮은 엔트로피 데이터에 대해
+ 최소 가용 RB 수 계산
+end note
+stop
+@enduml
